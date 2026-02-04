@@ -227,8 +227,11 @@ class: text-center
 
 # **Jamstack**
 
-> *Result: Devs are happy, end users does not know git, github, markdown, html, asciidoc*
+> *Result: Devs are happy, end users does not know git, github, markdown, html, asciidoc, they are sad*
 
+<div class="flex items-center justify-center h-full all:transition-400">
+<img src="/publicdomainq-0013970oxhywu.svg"class="w-64" op30 hover="op80" />
+</div>
 
 ---
 
@@ -392,12 +395,90 @@ const blogCollection = defineCollection({
 
 
 
+---
+
+# 9. The Missing Piece: Authentication 🔐
+
+Wait... if there is **no server**, how do we log in securely?
+
+### The Challenge
+1.  **OAuth 2.0 requires a secret:** To authenticate with GitHub, we need a `CLIENT_SECRET`.
+2.  **Client-side is insecure:** We cannot store this secret in the Vue/Astro code (it would be public).
+3.  **Vendor Lock-in:** Netlify offers "Netlify Identity", but what if we want to host on Cloudflare Pages, Vercel, or AWS?
+
+> **We need a tiny, invisible backend just for the handshake.**
+
+---
+
+# 10. The Solution: Cloudflare Workers 🌩️
+
+We use a lightweight **Serverless Function** to handle the OAuth "Dance".
+
+### Based on `sterlingwes/decap-proxy`
+
+*   **Architecture:** A minimal script running on Cloudflare's Edge Network.
+*   **Role:** It acts as the "middleman" between Decap CMS and GitHub.
+*   **Cost:** Virtually free (runs only during login).
+*   **Speed:** < 10ms execution time.
+
+> It replaces the need for a full auth server or Netlify Identity.
+
+---
+
+# 11. The Auth Flow (Under the Hood)
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant CMS as Decap CMS (Browser)
+    participant CF as 🌩️ Cloudflare Worker
+    participant GH as 🐙 GitHub
+
+    User->>CMS: Click "Login with GitHub"
+    CMS->>GH: Redirects to GitHub Auth Page
+    GH->>CMS: Returns temporary "Code"
+    Note over CMS, CF: ⚠️ Here is the magic
+    CMS->>CF: Sends "Code" to Worker
+    CF->>GH: Exchanges "Code" + "Secret" for Token
+    GH->>CF: Returns Access Token
+    CF->>CMS: Returns Token to Browser
+    CMS->>GH: Uses Token to push commits
+```
+
+---
+
+# 12. Implementation Details 🛠️
+
+How to wire it up in your project.
+
+**1. Deploy the Worker**
+Clone `sterlingwes/decap-proxy`, add your GitHub `CLIENT_ID` and `CLIENT_SECRET` to Cloudflare environment variables, and deploy.
+
+**2. Configure Decap (`admin/config.yml`)**
+Tell Decap to use your custom backend instead of the default.
+
+```yaml
+backend:
+  name: github
+  repo: your-name/your-project
+  branch: main
+  # ⬇️ The URL of your Cloudflare Worker
+  base_url: https://auth.your-domain.com 
+  auth_endpoint: auth
+```
+
+<div class="h-10"></div>
+
+
+> **Result:** A secure, serverless authentication flow that you fully control.
 
 ---
 
 
 
-# 10. Conclusion
+
+
+# 13. Conclusion
 
 ### "The Jamstack Maturity"
 
@@ -419,3 +500,4 @@ By using **Decap CMS** as a bridge and **Astro + Vue** as the engine, we treat *
 
 💻 github.com/aim-pro-eu/aim-pro-eu.github.io
 
+💻 https://aim-pro-eu.github.io

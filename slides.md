@@ -69,7 +69,7 @@ duration: 35min
 
 ---
 
-# 2. Another solution A Jamstack
+# 2. The dev solution A Jamstack
 
 The modern way to build Websites and Apps that delivers better performance
 
@@ -407,7 +407,7 @@ const blogCollection = defineCollection({
 
 ---
 
-# 9. The Missing Piece: Authentication 🔐
+# 10. The Missing Piece: Authentication 🔐
 
 Wait... if there is **no server**, how do we log in securely?
 
@@ -420,7 +420,7 @@ Wait... if there is **no server**, how do we log in securely?
 
 ---
 
-# 10. The Solution: Cloudflare Workers 🌩️
+# 11. The Solution: Cloudflare Workers 🌩️
 
 We use a lightweight **Serverless Function** to handle the OAuth "Dance".
 
@@ -435,7 +435,7 @@ We use a lightweight **Serverless Function** to handle the OAuth "Dance".
 
 ---
 
-# 11. The Auth Flow (Under the Hood)
+# 12. The Auth Flow (Under the Hood)
 
 ```mermaid
 sequenceDiagram
@@ -457,7 +457,7 @@ sequenceDiagram
 
 ---
 
-# 12. Implementation Details 🛠️
+# 13. Implementation Details 🛠️
 
 How to wire it up in your project.
 
@@ -485,7 +485,7 @@ backend:
 ---
 
 
-# 13. Conclusion
+# 14. Conclusion
 
 ### "The Jamstack Maturity"
 
@@ -507,4 +507,4 @@ By using **Decap CMS** as a bridge and **Astro + Vue** as the engine, we treat *
 
 💻 github.com/aim-pro-eu/aim-pro-eu.github.io
 
-💻 https://aim-pro-eu.github.io
+🌍 https://aim-pro-eu.github.io

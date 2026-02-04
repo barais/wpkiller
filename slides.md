@@ -227,7 +227,7 @@ class: text-center
 
 # **Jamstack**
 
-> *Result: Devs are happy, end users does not knwow git, github, markdown, html, asciidoc*
+> *Result: Devs are happy, end users does not know git, github, markdown, html, asciidoc*
 
 
 ---

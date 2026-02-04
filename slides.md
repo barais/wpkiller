@@ -244,8 +244,13 @@ We can reconcile both worlds by combining:
 
 
 ---
+hideInToc: true
+layout: two-cols
+class: my-cool-content-on-the-left
+---
 
 # 4. The Interface: Decap CMS 📝
+
 
 **Decap CMS** is a Single Page App that acts as a wrapper around your Git workflow.
 
@@ -255,10 +260,35 @@ We can reconcile both worlds by combining:
 
 > *To the editor, it looks like WordPress. To the repository, it looks like a Developer pushing code.*
 
+::right::
+
+![](/editor.webp)
+
 ---
 
 
-# 5. The Engine: Astro + Vue 🚀
+
+# 5. The DevOps Flow (Architecture)
+
+```mermaid
+sequenceDiagram
+    participant Editor as ✍️ Marketing Team
+    participant CMS as Decap CMS (Browser)
+    participant Git as 🐙 GitHub/GitLab
+    participant CI as ⚙️ Netlify/Vercel/Action
+    participant CDN as 🌍 Production Site
+
+    Editor->>CMS: Writes Article & Clicks "Publish"
+    CMS->>Git: API Call: Creates Commit & Push
+    Git->>CI: Webhook triggers Build
+    Note over CI: Astro builds static HTML from Markdown + Vue
+    CI->>CDN: Deploys Atomic Build
+    CDN->>Editor: Site Updated!
+```
+
+---
+
+# 6. The Engine: Astro + Vue 🚀
 
 ### Why Astro?
 *   **Zero JS by Default:** Ships HTML only.
@@ -283,25 +313,6 @@ import InteractiveCalculator from '../components/Calculator.vue';
 ---
 
 
-# 6. The DevOps Flow (Architecture)
-
-```mermaid
-sequenceDiagram
-    participant Editor as ✍️ Marketing Team
-    participant CMS as Decap CMS (Browser)
-    participant Git as 🐙 GitHub/GitLab
-    participant CI as ⚙️ Netlify/Vercel/Action
-    participant CDN as 🌍 Production Site
-
-    Editor->>CMS: Writes Article & Clicks "Publish"
-    CMS->>Git: API Call: Creates Commit & Push
-    Git->>CI: Webhook triggers Build
-    Note over CI: Astro builds static HTML from Markdown + Vue
-    CI->>CDN: Deploys Atomic Build
-    CDN->>Editor: Site Updated!
-```
-
----
 
 # 7. Behind the scene. Connecting the Dots...
 

@@ -89,10 +89,7 @@ level: 1
 
 ---
 hideInToc: true
-layout: iframe-right
-
-# the web page source
-url: https://d33wubrfki0l68.cloudfront.net/b7d16f7f3654fb8572360301e60d76df254a323e/385ec/img/svg/architecture.svg
+layout: two-cols
 
 # a custom class name to the content
 class: my-cool-content-on-the-left
@@ -104,13 +101,17 @@ class: my-cool-content-on-the-left
 
 - The work was done during the build, so now the generated site is stable and can be hosted without servers which might require patching, updating and maintain.
 
+::right::
+
+<div class="flex items-center justify-center h-full all:transition-400">
+<img src="https://d33wubrfki0l68.cloudfront.net/b7d16f7f3654fb8572360301e60d76df254a323e/385ec/img/svg/architecture.svg" class="w-96" />
+</div>
+
 
 
 ---
-layout: iframe-right
+layout: two-cols
 # the web page source
-url: https://d33wubrfki0l68.cloudfront.net/b7d16f7f3654fb8572360301e60d76df254a323e/385ec/img/svg/architecture.svg
-
 # a custom class name to the content
 class: my-cool-content-on-the-left
 title: Why Jamstack?
@@ -124,6 +125,13 @@ level: 1
 - The Jamstack removes multiple moving parts and systems from the hosting infrastructure resulting in fewer servers and systems to harden against attack.
 
 - Serving pages and assets as pre-generated files allows read-only hosting reducing attack vectors even further. Meanwhile dynamic tools and services can be provided by vendors with teams dedicated to securing their specific systems and providing high levels of service.
+
+::right::
+
+<div class="flex items-center justify-center h-full all:transition-400">
+<img src="https://d33wubrfki0l68.cloudfront.net/b7d16f7f3654fb8572360301e60d76df254a323e/385ec/img/svg/architecture.svg" class="w-96" />
+</div>
+
 
 ---
 hideInToc: true
@@ -195,6 +203,8 @@ class: my-cool-content-on-the-left
 - Bye-bye infrastructure lock-in.
 
 ::right::
+
+
 
 ![](/1_LYxdhJ6QndWdnDmLK9tpGw.png)
 
@@ -473,9 +483,6 @@ backend:
 > **Result:** A secure, serverless authentication flow that you fully control.
 
 ---
-
-
-
 
 
 # 13. Conclusion

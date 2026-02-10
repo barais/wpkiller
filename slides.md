@@ -68,7 +68,7 @@ duration: 35min
 
 ---
 
-# 2. The dev solution A Jamstack
+# 2. The dev solution: A Jamstack
 
 The modern way to build Websites and Apps that delivers better performance
 
@@ -234,7 +234,7 @@ class: text-center
 ---
 
 
-# **Jamstack**
+# **Results with Jamstack**
 
 > *Result: Devs are happy, end users does not know git, github, markdown, html, asciidoc, they are sad*
 

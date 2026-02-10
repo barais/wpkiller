@@ -490,41 +490,46 @@ title: Smart Caching Strategy
 
 # 11. Smart Caching 🧠
 
-### The "Git-Driven" Invalidation Strategy
+### The "Git-Aware" Client Strategy:
 
-Standard caching relies on time (TTL). Our strategy relies on **State**.
 
-1.  **The Source of Truth:** The **Git Commit SHA** defines the version of the site.
-2.  **Immutable Assets:** Astro generates hashed filenames during the build based on content.
-3.  **The Logic:**
-    *   **Same Content** = Same Hash = **Browser serves from Disk (Instant).**
-    *   **New Commit** = New Hash = **Browser downloads only what changed.**
+1.  **Optimistic UI:** By default, serve content immediately from **LocalStorage** if it has cache value.
+2.  **The "Heartbeat" Check:** Periodically (e.g., 1 out of XX loads), the app queries the **GitHub API** to get the latest commit SHA.
+3.  **Atomic Invalidation:**
+    *   **SHA matches LocalStorage?** Do nothing. Continue serving cache.
+    *   **New SHA detected?** 🚨 **Purge** LocalStorage, fetch fresh content, update the stored SHA.
 
-> *Zero "Did you try clearing your cache?" moments.*
+> *Result: Near-instant loads for 98% of visits, with guaranteed freshness when it matters.*
+
 
 ::right::
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Browser as 💻 User Browser
-    participant CDN as 🌍 CDN / Edge
-    participant Git as 🐙 Git Repo
+    participant App as 🟢 App (Browser)
+    participant LS as 📦 LocalStorage
+    participant GH as 🐙 GitHub API
+    participant CDN as 🌍 Production
 
-    Note over Browser, Git: 🟢 Scenario: Content hasn't changed
-    Browser->>CDN: Request Index.html
-    CDN->>Browser: Returns HTML (ETag: "Commit-A")
-    Browser->>Browser: Checks Local Cache for "Commit-A" assets
-    Browser-->>Browser: ⚡ LOADS INSTANTLY FROM DISK
+    Note over App, CDN: 🎲 Random Check (1/50 chance) triggered
 
-    Note over Browser, Git: 🔴 Scenario: Editor updates content
-    Git->>CDN: 🚀 Push & Build (New Commit-B)
-    Browser->>CDN: Request Index.html
-    CDN->>Browser: Returns HTML (ETag: "Commit-B")
-    Browser->>Browser: "Commit-B" not found locally
-    Browser->>CDN: Downloads NEW assets only
-    CDN->>Browser: Serves optimized files
+    App->>GH: GET /repos/.../commits/main
+    GH->>App: Return Latest SHA: "fe24a1"
+    App->>LS: Get stored SHA
+    
+    alt 🟢 SHA Matches (Cache Hit)
+        App->>App: Keep using Local Cache
+        Note right of App: ⚡ Instant Load
+    else 🔴 New SHA (Cache Miss)
+        App->>LS: 🗑️ Invalidate / Clear Cache
+        App->>CDN: Fetch Fresh Content
+        CDN->>App: Return New Assets
+        App->>LS: Update SHA to "fe24a1"
+    end
 ```
+
+We don't rely on standard browser caching headers alone. We proactively check the **Source of Truth**: GitHub.
 
 
 ---

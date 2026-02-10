@@ -5,12 +5,10 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: Aim pro website
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## Building a "WordPress-Killer" with Astro, Vue, and Decap CMS
 
-  Learn more at [Sli.dev](https://sli.dev)
 # apply UnoCSS classes to the current slide
 class: text-center
 # https://sli.dev/features/drawing
@@ -25,13 +23,14 @@ duration: 35min
 ---
 
 
-# The Best of Both Worlds
+# The Modern Web Triad
 
 ## Building a "WordPress-Killer" with Astro, Vue, and Decap CMS
 
 <br>
 
-### Bridging the gap between Dev Experience (DX) and Editor Experience (UX)
+### Unifying Dev Experience (DevX) and Editor Experience (UX), and Ops Performance with Smart Client-Side Caching
+
 
 ---
 
@@ -482,10 +481,58 @@ backend:
 
 > **Result:** A secure, serverless authentication flow that you fully control.
 
+
+
+---
+layout: two-cols
+title: Smart Caching Strategy
+---
+
+# 14. Smart Caching 🧠
+
+### The "Git-Driven" Invalidation Strategy
+
+Standard caching relies on time (TTL). Our strategy relies on **State**.
+
+1.  **The Source of Truth:** The **Git Commit SHA** defines the version of the site.
+2.  **Immutable Assets:** Astro generates hashed filenames during the build based on content.
+3.  **The Logic:**
+    *   **Same Content** = Same Hash = **Browser serves from Disk (Instant).**
+    *   **New Commit** = New Hash = **Browser downloads only what changed.**
+
+> *Zero "Did you try clearing your cache?" moments.*
+
+::right::
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Browser as 💻 User Browser
+    participant CDN as 🌍 CDN / Edge
+    participant Git as 🐙 Git Repo
+
+    Note over Browser, Git: 🟢 Scenario: Content hasn't changed
+    Browser->>CDN: Request Index.html
+    CDN->>Browser: Returns HTML (ETag: "Commit-A")
+    Browser->>Browser: Checks Local Cache for "Commit-A" assets
+    Browser-->>Browser: ⚡ LOADS INSTANTLY FROM DISK
+
+    Note over Browser, Git: 🔴 Scenario: Editor updates content
+    Git->>CDN: 🚀 Push & Build (New Commit-B)
+    Browser->>CDN: Request Index.html
+    CDN->>Browser: Returns HTML (ETag: "Commit-B")
+    Browser->>Browser: "Commit-B" not found locally
+    Browser->>CDN: Downloads NEW assets only
+    CDN->>Browser: Serves optimized files
+```
+
+
 ---
 
 
-# 14. Conclusion
+
+
+# 15. Conclusion
 
 ### "The Jamstack Maturity"
 
@@ -495,7 +542,7 @@ By using **Decap CMS** as a bridge and **Astro + Vue** as the engine, we treat *
 
 *   ✅ Editors get their comfortable UI.
 *   ✅ Developers get their modern Git workflow.
-*   ✅ Users get the fastest website possible.
+*   ✅ Users get the fastest website possible using cache.
 
 ---
 

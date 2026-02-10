@@ -367,38 +367,38 @@ const blogCollection = defineCollection({
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 ![](/website.webp)
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 ![](/login.webp)
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 ![](/cms.webp)
 
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 ![](/editor.webp)
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 ![](/blogpostss.webp)
 
 ---
 
-# 9. Aim-Pro Website demo
+# 9. Aim-Pro Website demo [🌍](https://aim-pro-eu.github.io)
 
 <img src="/blogposts.webp" width ="400"/>
 
@@ -419,7 +419,7 @@ Wait... if there is **no server**, how do we log in securely?
 
 ---
 
-# 11. The Solution: Cloudflare Workers 🌩️
+# 10. The Solution: Cloudflare Workers 🌩️
 
 We use a lightweight **Serverless Function** to handle the OAuth "Dance".
 
@@ -434,7 +434,7 @@ We use a lightweight **Serverless Function** to handle the OAuth "Dance".
 
 ---
 
-# 12. The Auth Flow (Under the Hood)
+# 10. The Auth Flow (Under the Hood)
 
 ```mermaid
 sequenceDiagram
@@ -456,7 +456,7 @@ sequenceDiagram
 
 ---
 
-# 13. Implementation Details 🛠️
+# 10. Implementation Details 🛠️
 
 How to wire it up in your project.
 
@@ -488,7 +488,7 @@ layout: two-cols
 title: Smart Caching Strategy
 ---
 
-# 14. Smart Caching 🧠
+# 11. Smart Caching 🧠
 
 ### The "Git-Driven" Invalidation Strategy
 
@@ -532,7 +532,7 @@ sequenceDiagram
 
 
 
-# 15. Conclusion
+# 12. Conclusion
 
 ### "The Jamstack Maturity"
 

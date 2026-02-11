@@ -62,7 +62,7 @@ duration: 35min
 
 <br>
 
-> **Usually, the solution is WordPress.**
+> **Usually, the solution is often driven by Content Editor, i.e. WordPress.**
 >
 > *Result: Devs are sad, Site is slow, Security is a risk.*
 
